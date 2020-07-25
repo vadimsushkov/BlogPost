@@ -1,12 +1,15 @@
 <h2> <%= @post.title %></h2>
 <p><%= @post.body %></p>
-<hr>
-<%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-default' %>
-<%= link_to "Delete", post_path(@post), 
+
+<% if user_signed_in? && current_user.admin? %>
+	<hr>
+	<%= link_to "Edit", edit_admin_post_path(@post), :class => 'btn btn-default' %>
+	<%= link_to "Delete", admin_post_path(@post), 
 				method: :delete,
 				data: {confirm: 'Are you sure?'},
 				:class => 'btn btn-danger' %>
-<hr>
+	<hr>
+<% end %>
 
 <h3>Comments</h3>
 <% @post.comments.each do |comment| %>
@@ -15,6 +18,7 @@
 	</div>
 <% end %>
 
+<% if user_signed_in? %>
 <h1>Add comment</h1>
 <%= form_for([@post, @post.comments.build]) do |f| %>
 	<% if @post.errors.any? %>
@@ -35,4 +39,5 @@
 	<p>
 		<%= f.submit({:class => 'btn btn-primary'}) %>
 	</p>
+<% end %>
 <% end %>

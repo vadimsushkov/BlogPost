@@ -20,16 +20,31 @@
       <ul class="navbar-nav mr-auto">
         <li><%= link_to "Home", home_path %></li>
       </ul>
-       <ul class="navbar-nav mr-auto" style="position: relative; right: 500px">
-        <li><%= link_to "Create Post", new_post_path %></li>
+      <% if user_signed_in? && current_user.admin? %>
+       <ul class="navbar-nav mr-auto" style="position: relative; right: 600px">
+        <li><%= link_to "Create Post",  new_admin_post_path %></li>
       </ul>
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path do %> 
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign out</button>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path do %> 
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in/up</button>
+        <% end %>
+      <% end %>
     </div>
   </nav>
-  <div class="container" style="position: absolute; top: 200px; right: 70%; left: 30%;">
+  <div class="container" style="position: absolute; top: 200px; margin-left: 20%">
+    <div class="col-md-12">
+      <% flash.each do |name, message| %>
+      <div class="alert <%= bootstrap_class_for(name) %>">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <%= message %>
+      </div>
+      <% end %>
+    </div>
     <%= yield %>
   </div>
   </body>
