@@ -20,6 +20,7 @@
       <ul class="navbar-nav mr-auto">
         <li><%= link_to "Home", home_path %></li>
       </ul>
+<<<<<<< HEAD
       <ul class="navbar-nav mr-auto" style="position: relative; right: 265px">
         <li><%= link_to "Rent",  products_path %></li>
       </ul>
@@ -49,6 +50,15 @@
        </div>
       <% if user_signed_in? %>
         <%= link_to destroy_user_session_path, method: :delete do %> 
+=======
+      <% if user_signed_in? && current_user.admin? %>
+       <ul class="navbar-nav mr-auto" style="position: relative; right: 600px">
+        <li><%= link_to "Create Post",  new_admin_post_path %></li>
+      </ul>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path do %> 
+>>>>>>> dcf1e8a1e5578fb3f934ac1ec5ce0cdba4f27e8e
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign out</button>
         <% end %>
       <% else %>

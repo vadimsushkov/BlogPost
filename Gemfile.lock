@@ -156,8 +156,11 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+<<<<<<< HEAD
     ruby-vips (2.0.17)
       ffi (~> 1.9)
+=======
+>>>>>>> dcf1e8a1e5578fb3f934ac1ec5ce0cdba4f27e8e
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -195,7 +198,11 @@ GEM
       tzinfo (>= 1.0.0)
     warden (1.2.8)
       rack (>= 2.0.6)
+<<<<<<< HEAD
     web-console (4.0.4)
+=======
+    web-console (4.0.3)
+>>>>>>> dcf1e8a1e5578fb3f934ac1ec5ce0cdba4f27e8e
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -222,7 +229,10 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+<<<<<<< HEAD
   carrierwave (~> 2.0)
+=======
+>>>>>>> dcf1e8a1e5578fb3f934ac1ec5ce0cdba4f27e8e
   devise
   jbuilder (~> 2.7)
   mini_magick

@@ -2,7 +2,10 @@
 <% @posts.each do |post| %>
 	<div class="well">
 	<h3><%= post.title %></h3>
+<<<<<<< HEAD
 	<%= image_tag post.image.url(:thumb), class: 'image-show' if post.image? %>
+=======
+>>>>>>> dcf1e8a1e5578fb3f934ac1ec5ce0cdba4f27e8e
 	<%= link_to "Read More", post_path(post), :class => 'btn btn-default' %>
 	</div>
 	<hr>
