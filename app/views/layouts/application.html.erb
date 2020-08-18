@@ -20,16 +20,53 @@
       <ul class="navbar-nav mr-auto">
         <li><%= link_to "Home", home_path %></li>
       </ul>
-       <ul class="navbar-nav mr-auto" style="position: relative; right: 500px">
-        <li><%= link_to "Create Post", new_post_path %></li>
+      <ul class="navbar-nav mr-auto" style="position: relative; right: 265px">
+        <li><%= link_to "Rent",  products_path %></li>
       </ul>
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <% if user_signed_in? && current_user.admin? %>
+       <ul class="navbar-nav mr-auto" style="position: relative; right: 530px">
+        <li><%= link_to "Create Post",  new_admin_post_path %></li>
+      </ul>
+      <ul class="navbar-nav mr-auto" style="position: relative; right: 790px">
+        <li><%= link_to "Admin panel",  users_index_path %></li>
+      </ul>
+      <% end %>
+
+    <div class="profbutton", style="position: relative; right: 25px; top: 8px">
+      <% if user_signed_in? && current_user.avatar? %>
+        <%= link_to edit_user_registration_path(current_user) do %> 
+        <p><%= image_tag current_user.avatar.url(:smallAv), class: 'avstyle' %></p>
+        <% end %>
+      <% else %>
+      <% if user_signed_in? %>
+        <%= link_to edit_user_registration_path(current_user) do %> 
+           <svg width="1em" height="1em" viewBox="0 0 15 15" class="bi bi-person" fill="currentColor"> xmlns="http://www.w3.org/2000/svg" >
+           <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            </svg>
+          <% end %>
+          <% end %>
+       <% end %> 
+       </div>
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path, method: :delete do %> 
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign out</button>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path do %> 
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in/up</button>
+        <% end %>
+      <% end %>
     </div>
   </nav>
-  <div class="container" style="position: absolute; top: 200px; right: 70%; left: 30%;">
+  <div class="container" style="position: absolute; top: 200px; margin-left: 20%">
+    <div class="col-md-12">
+      <% flash.each do |name, message| %>
+      <div class="alert <%= bootstrap_class_for(name) %>">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <%= message %>
+      </div>
+      <% end %>
+    </div>
     <%= yield %>
   </div>
   </body>

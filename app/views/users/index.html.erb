@@ -1,0 +1,9 @@
+<% @users.each do |user| %>
+  <div class="well">
+  <p><%= image_tag user.avatar.url(:smallAv), class: 'avstyle' if user.avatar? %>
+  <%= user.email %><br/>
+  <%= link_to "Read More", user_path(user), :class => 'btn btn-default' %></p>
+	<hr>
+  </div>
+  <hr>
+<% end %>

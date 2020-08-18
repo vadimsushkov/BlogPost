@@ -1,0 +1,9 @@
+<%= simple_form_for @product do |f| %>
+  <%= f.input :headline %>
+  <%= f.input :description %>
+  <%= f.input :price, hint: "price must be in USD for one day" %>
+  <%= f.input :rooms, as: :radio_buttons, collection: [['One room', 1], ['Two rooms', 2], ['Three rooms', 3], ['Four rooms', 4]] %>
+  <%= f.input :city, collection: ['Kyiv', 'Kropyvnyskyi', 'Cherkasy', 'Chernihiv', 'Chernivtsi', 'Dnipropetrovsk', 'Donetsk', 'Ivano-Frankivsk', 'Kharkiv', 'Kherson', 'Khmelnytsk', 'Luhansk', 'Lviv', 'Mykolaiv', 'Odesa', 'Poltava', 'Rivne', 'Sumy', 'Ternopil', 'Vinnytsia', 'Lutsk', 'Uzhhorod', 'Zaporizhzhia', 'Zhytomyr'] %>
+  <%= f.hidden_field :author, required: true, class: 'form-control', value:current_user.email %>
+  <%= f.button :submit %>
+<% end %>

@@ -1,0 +1,15 @@
+<p><%= image_tag @user.avatar.url(:bigAv), class: 'avstyle' if @user.avatar? %></p>
+<h1><%= @user.email %></h1>
+<p>Created at: <%= @user.created_at %></p>
+<p>Last update: <%= @user.updated_at %></p>
+<p>Name: <%= @user.name %></p>
+<p>Phone: <%= @user.phone %></p>
+<p>Birthday: <%= @user.birthday %></p>
+<% if user_signed_in? && current_user.admin? %>
+	<hr>
+	<%= link_to "Delete", admin_user_path(@user), 
+				method: :delete,
+				data: {confirm: 'Are you sure?'},
+				:class => 'btn btn-danger' %>
+	<hr>
+<% end %>

@@ -1,12 +1,16 @@
 <h2> <%= @post.title %></h2>
+<p><%= image_tag @post.image.url(:large), class: 'image-show' if @post.image? %></p>
 <p><%= @post.body %></p>
-<hr>
-<%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-default' %>
-<%= link_to "Delete", post_path(@post), 
+
+<% if user_signed_in? && current_user.admin? %>
+	<hr>
+	<%= link_to "Edit", edit_admin_post_path(@post), :class => 'btn btn-default' %>
+	<%= link_to "Delete", admin_post_path(@post), 
 				method: :delete,
 				data: {confirm: 'Are you sure?'},
 				:class => 'btn btn-danger' %>
-<hr>
+	<hr>
+<% end %>
 
 <h3>Comments</h3>
 <% @post.comments.each do |comment| %>
@@ -15,6 +19,7 @@
 	</div>
 <% end %>
 
+<% if user_signed_in? %>
 <h1>Add comment</h1>
 <%= form_for([@post, @post.comments.build]) do |f| %>
 	<% if @post.errors.any? %>
@@ -23,8 +28,8 @@
 		<% end %>
 	<% end %>
 	<p>
-		<%= f.label :username %><br>
-		<%= f.text_field(:username, {:class => 'form-control', :style =>'width: 200px'}) %>
+		<%= f.label current_user.email %><br>
+		<%= f.hidden_field :username, required: true, class: 'form-control', value:current_user.email, style: 'width: 0px; height: 0px; visibility: hidden' %>
 	</p>
 
 	<p>
@@ -35,4 +40,5 @@
 	<p>
 		<%= f.submit({:class => 'btn btn-primary'}) %>
 	</p>
+<% end %>
 <% end %>
